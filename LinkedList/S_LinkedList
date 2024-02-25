@@ -1,0 +1,33 @@
+#include<stdio.h>
+
+struct Student{
+    int rollno;
+    struct Student *next;
+}head, one, two, three, four;
+
+void Display(){
+    struct Student *p = &head;
+    printf("\nData : ");
+    while (p->next != NULL)
+    {
+        printf(" %d ", p->rollno);
+        p = p->next;
+    }
+    
+}
+int main(){
+    head.next = &one;
+    one.next = &two;
+    two.next = &three;
+    three.next = &four;
+    four.next = NULL;
+
+    head.rollno = 1;
+    one.rollno = 2;
+    two.rollno = 3;
+    three.rollno = 4;
+    four.rollno = 5;
+
+    Display();
+    return 0;
+}
