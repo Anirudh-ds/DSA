@@ -71,31 +71,41 @@ int main(){
         printf("\n\nStack Created Successfully!!\n\n");
   
     }
-
-    while(option){
+        
+    
+    do{
         printf("\nPress 0 : Exit\nPress 1 : Push\nPress 2 : Pop\nPress 3 : Show Top\nPress 4 : Check Stack is Empty or Not\nPress 5 : Show Size\nPress 6 : Show Stack\nPress 7 : To change size of Stack\n");
         scanf("%d", &option);
-        
-        if(option == 0){
-            printf("\n\nBYE BYE!!\n\n");
-        }else if(option == 1){
-            push();
-        }else if(option == 2){
-            pop();
-        }else if(option == 3){
-            top();
-        }else if(option == 4){
-            isempty();
-        }else if(option == 5){
-            sizee();
-        }else if(option == 6){
-            display();
-        }else if(option == 7){
-            resize();
-        }else{
-            printf("\n\nINVALID INPUT!!!\n\n");
-        }
-    }
+        switch(option){
+            case 0:
+                printf("\n\nBYE BYE!!\n\n");
+                break;
+            case 1: 
+                push();
+                break;
+        case 2:
+                pop();
+                break;
+            case 3:
+                top();
+                break;
+            case 4:
+                isempty();
+                break;
+            case 5:
+                sizee();
+                break;
+            case 6:
+                display();
+                break;
+            case 7:
+                resize();
+                break;
+            default:
+                printf("\n\nINVALID INPUT!!!\n\n");
+                break;
+        }    
+    }while(option != 0);
 
     free(stack);
 
