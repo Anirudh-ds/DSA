@@ -65,29 +65,38 @@ int main(){
     scanf("%d", &size);
     ptr = (int *)malloc(size * sizeof(int));
 
-    while (option){
+    do{
         printf("\nPress 0 : Exit\nPress 1 : Enqueue\nPress 2 : Dequeue\nPress 3 : Peek\nPress 4 : Isempty\nPress 5 : Isfull\nPress 6 : Size\nPress 7 : Display\n");
         scanf("%d", &option);
-
-        if(option == 1){
-            Enqueue();
-        }else if(option == 2){
-            Dequeue();
-        }else if(option == 3){
-            Peek();
-        }else if (option == 4){
-            Isempty();
-        }else if(option == 5){
-            Isfull();
-        }else if(option == 6){
-            Size();
-        }else if(option == 7){
-            Display();
-        }else if(option == 0){
-            printf("\nBYE\nBYE\nBYE");
-        }else{
-            printf("\nWRONG INPUT!!");
+        switch(option){
+            case 0:
+                printf("\nBYE\nBYE\nBYE");
+                break;
+            case 1:
+                Enqueue();
+                break;
+            case 2:
+                Dequeue();
+                break;
+            case 3:
+                Peek();
+                break;
+            case 4:
+                Isempty();
+                break;
+            case 5:
+                Isfull();
+                break;
+            case 6:
+                Size();
+                break;
+            case 7:
+                Display();
+                break;
+            default:
+                printf("\n!!Wrong Input!\n");
+                break;
         }
-    }
+    }while(option);
     return 0;
 }
