@@ -1,5 +1,6 @@
 // ==> Infix : A + B * C, Postfix : AB+C*
 
+// ==> For Postfix : Reverse the input, convert it into prefix(pushing elements with higher precedence only not with equal precedence) reverset the output again
 #include<stdio.h>
 #include<stdlib.h>
 #include<ctype.h>
@@ -102,12 +103,75 @@ void convertPostfix(char input[], char postfix[], char stack[], int *postTop, in
             if(isEmpty(*stackTop))
             {
                 push(input[i], stack, stackTop);
+            }else if(input[i] == '^' && stack[*stackTop] == '^'){
+                push(input[i], stack, stackTop);
+
             }else if((getPrecedence(input[i]) > getPrecedence(stack[*stackTop])) )
             {
                 push(input[i], stack, stackTop);
             }else if(getPrecedence(input[i]) <= getPrecedence(stack[*stackTop]))
             {
                 while(getPrecedence(input[i]) <= getPrecedence(stack[*stackTop]) )
+                {
+                    pop(stack, stackTop, postfix, postTop);
+                }
+                push(input[i], stack, stackTop); 
+            }else{
+                continue;
+            }
+                
+       }else if(input[i] == ' ') continue;
+       else{
+            printf("ERROR OCCURED AT %c\n", input[i]);
+            break;
+        }
+        
+    }
+    // ==> Empty stack when you are done traversing the input 
+    while(*stackTop != -1){
+        pop(stack, stackTop, postfix, postTop);
+    }
+
+}
+
+void convertPrefix(char input[], char postfix[], char stack[], int *postTop, int *stackTop){
+    // ==> Traversing the user given string
+    for(int i = 0; input[i] != '\0'; i++)
+    {   // ==> If brackets are encountered
+        if(input[i] == '(' || input[i] == ')')
+        {
+            switch(input[i])
+            {
+                case '(':
+                    push(input[i], stack, stackTop);
+                    break;
+                case ')':
+                    while(stack[*stackTop] != '(')
+                        pop(stack, stackTop, postfix, postTop);
+                    *stackTop = *stackTop - 1;
+                    break;
+                default:
+                    // printf("\nSwtich Default");
+                    break;
+            }
+        }else if(isAplhabet(input[i]))
+       {    // ==> In case of alphabet just push it into output string
+            postfix[*postTop] = input[i];
+            *postTop = *postTop + 1;
+       }else if(isOperator(input[i]))
+       {    // ==> In case of operator push into stack if stack is empty other check precedence and push accordingly 
+            if(isEmpty(*stackTop))
+            {
+                push(input[i], stack, stackTop);
+            }else if(input[i] == '^' && stack[*stackTop] == '^'){
+                push(input[i], stack, stackTop);
+
+            }else if((getPrecedence(input[i]) > getPrecedence(stack[*stackTop])) )
+            {
+                push(input[i], stack, stackTop);
+            }else if(getPrecedence(input[i]) < getPrecedence(stack[*stackTop]))
+            {
+                while(getPrecedence(input[i]) < getPrecedence(stack[*stackTop]) )
                 {
                     pop(stack, stackTop, postfix, postTop);
                 }
@@ -209,13 +273,13 @@ int main(){
             // ==> Taking input and reversing it into prefix
             revString(input, prefix);
             // ==> Below 3 prints can be used to debug  the errors while converting input to postfix and back from postfix to output
-            printf("\n\nInput : "); // 1
-            puts(input);
-            printf("\nReverse : "); // 2
-            puts(prefix);
-            convertPostfix(prefix, postfix, stack, &postTop, &stackTop);
-            printf("\nPostfix : "); // 3
-            puts(postfix);
+            // printf("\n\nInput : "); // 1
+            // puts(input);
+            // printf("\nReverse : "); // 2
+            // puts(prefix);
+            convertPrefix(prefix, postfix, stack, &postTop, &stackTop);
+            // printf("\nPostfix : "); // 3
+            // puts(postfix);
 
             // ==> Taking postfix and reversing it get prefix
             revString(postfix, prefix);
