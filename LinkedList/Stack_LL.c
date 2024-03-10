@@ -12,21 +12,16 @@ bool Isempty(){
     return (top == NULL) ? true : false ;
 }
 
-void Display(){
+void Display(struct linkedlist *current){
     if(Isempty()){
         printf("\nSTACK IS EMPTY!\n");
         return;
     }
 
-    struct linkedlist *display = top;
-    printf("\nSTACK : ");
-    while(display != NULL){
-        printf("%d", display->data);
-        if(display->next != NULL)
-            printf(" -> ");
-        display = display->next;
+    if(current->next != NULL){
+        Display(current->next);
     }
-
+    printf(" %d", current->data);
 }
 
 void Push(){
@@ -75,17 +70,20 @@ int main(){
             break;
         case 1:
             Push();
-            Display();
+            printf("\nStack :");
+            Display(top);
             break;
         case 2:
             Pop();
-            Display();
+            printf("\nStack :");
+            Display(top);
             break;
         case 3:
             printf("TOP : %d", top->data);
             break;
         case 4:
-            Display();
+            printf("\nStack :");
+            Display(top);
             break;
         default:
             printf("\nWrong Input!\n");
