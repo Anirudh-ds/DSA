@@ -21,10 +21,10 @@ void sortBubble(int * arr)
 {
     for(int i = 0; i < size; i++)
     {
-        for(int j = i+1; j < size; j++)
+        for(int j = 0; j < size-i-1; j++)
         {
-            if(arr[j] < arr[i])
-                swap(&arr[i], &arr[j]);
+            if(arr[j] > arr[j+1])
+                swap(&arr[j+1], &arr[j]);
         }
     }
 }
