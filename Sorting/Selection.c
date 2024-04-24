@@ -19,7 +19,7 @@ void display(int * arr)
 
 // int arr[] = {5, 8, 2, 10, 6};
 
-// ==> Insertion Swap with multiple swaps
+// ==> Selection Swap with multiple swaps
 void sortSelection_01(int * arr)
 {
     for(int i = 0; i < size; i++)
@@ -33,7 +33,7 @@ void sortSelection_01(int * arr)
     }
 }
 
-// ==> Insertion Swap with limited swaps
+// ==> Selection Swap with limited swaps
 void sortSelection_02(int * arr)
 {
     int noSmall = 0, indexSmall = 0;
