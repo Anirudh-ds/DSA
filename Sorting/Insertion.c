@@ -24,7 +24,7 @@ void sortInsertion(int * arr)
         for(int j = i+1; j < size; j++)
         {
             index = j;
-            while(arr[j] < arr[i] && index >= 0)
+            while(arr[j] < arr[i] && index > 0)
             {
                 swap(&arr[j], &arr[i]);
             }
